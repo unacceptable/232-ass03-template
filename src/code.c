@@ -1,5 +1,11 @@
-//char * AUTHOR_NAME = (char *) "Jakub Pach";
-//char * AUTHOR_AUTHORSHIP = (char *) "I acknowledge that I have worked on this assignment independently, except where explicitly noted and referenced. Any collaboration or use of external resources has been properly cited. I am fully aware of the consequences of academic dishonesty and agree to abide by the university's academic integrity policy. I understand the seriousness and implications of plagiarism.";
+// Robert Jackson
+// CSCI 232 Fall 2026
+// Programming Assignment #3
+// I declare that I am the author of this work, take full responsibility for it, and have disclosed any material external assistance.
+// I collaborated with Claude Code (Anthropic, Claude Opus 5.5) to complete this assignment.
+
+char * AUTHOR_NAME = (char *) "Robert Jackson";
+char * AUTHOR_AUTHORSHIP = (char *) "I acknowledge that I have worked on this assignment independently, except where explicitly noted and referenced. Any collaboration or use of external resources has been properly cited. I am fully aware of the consequences of academic dishonesty and agree to abide by the university's academic integrity policy. I understand the seriousness and implications of plagiarism.";
 
 #include <stddef.h>
 #include <stdio.h>
@@ -54,7 +60,9 @@ int   sum_chain(Node *headPtr);
 
 void swap(int *aPtr, int *bPtr)
 {
-    // TODO
+    int temp = *aPtr;
+    *aPtr = *bPtr;
+    *bPtr = temp;
 }
 
 
@@ -78,8 +86,14 @@ void swap(int *aPtr, int *bPtr)
 
 char* find_last_char(char *sPtr)
 {
-    // TODO
-    return NULL;
+    if (sPtr == NULL || *sPtr == '\0')
+        return NULL;
+
+    int i = 0;
+    while (*(sPtr + i + 1) != '\0')
+        i++;
+
+    return sPtr + i;
 }
 
 
@@ -97,7 +111,12 @@ char* find_last_char(char *sPtr)
 
 void link_three(Node *aPtr, Node *bPtr, Node *cPtr)
 {
-    // TODO
+    if (aPtr == NULL || bPtr == NULL || cPtr == NULL)
+        return;
+
+    aPtr->nextPtr = bPtr;
+    bPtr->nextPtr = cPtr;
+    cPtr->nextPtr = NULL;
 }
 
 
@@ -114,7 +133,11 @@ void link_three(Node *aPtr, Node *bPtr, Node *cPtr)
 
 void remove_middle(Node *aPtr, Node *bPtr, Node *cPtr)
 {
-    // TODO
+    if (aPtr == NULL || bPtr == NULL || cPtr == NULL)
+        return;
+
+    aPtr->nextPtr = cPtr;
+    bPtr->nextPtr = NULL;
 }
 
 
@@ -131,7 +154,10 @@ void remove_middle(Node *aPtr, Node *bPtr, Node *cPtr)
 
 void remove_last(Node *bPtr)
 {
-    // TODO
+    if (bPtr == NULL)
+        return;
+
+    bPtr->nextPtr = NULL;
 }
 
 
@@ -147,7 +173,10 @@ void remove_last(Node *bPtr)
 
 void remove_first(Node *aPtr)
 {
-    // TODO
+    if (aPtr == NULL)
+        return;
+
+    aPtr->nextPtr = NULL;
 }
 
 
@@ -172,7 +201,9 @@ void remove_first(Node *aPtr)
 
 void swap_ptrs(int **aPtrPtr, int **bPtrPtr)
 {
-    // TODO
+    int *temp = *aPtrPtr;
+    *aPtrPtr = *bPtrPtr;
+    *bPtrPtr = temp;
 }
 
 
@@ -197,7 +228,7 @@ void swap_ptrs(int **aPtrPtr, int **bPtrPtr)
 
 void nullify(int **ppPtr)
 {
-    // TODO
+    *ppPtr = NULL;
 }
 
 
@@ -224,7 +255,13 @@ void nullify(int **ppPtr)
 
 void assign_bytes(long long *nPtr)
 {
-    // TODO
+    if (nPtr == NULL)
+        return;
+
+    unsigned char *bytePtr = (unsigned char *) nPtr;
+
+    for (int i = 0; i < 8; i++)
+        *(bytePtr + i) = i + 1;
 }
 
 
@@ -246,6 +283,14 @@ void assign_bytes(long long *nPtr)
 
 int sum_chain(Node *headPtr)
 {
-    // TODO
-    return 0;
+    int   sum        = 0;
+    Node *currentPtr = headPtr;
+
+    while (currentPtr != NULL)
+    {
+        sum += currentPtr->value;
+        currentPtr = currentPtr->nextPtr;
+    }
+
+    return sum;
 }
